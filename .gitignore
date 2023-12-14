@@ -19,3 +19,13 @@
 
 # Go workspace file
 go.work
+
+# Log files
+logs/*.log
+
+# Database files
+data/
+*.db
+
+# Environment file
+.env

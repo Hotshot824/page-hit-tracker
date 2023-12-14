@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  router:
+    image: golang:1.21.5-bullseye
+    restart: always
+    stdin_open: true
+    tty: true
+    env_file:
+      - .env
+    environment:
+      TZ: /etc/localtime
+    volumes:
+      # Initialization settings
+      - /etc/localtime:/etc/localtime:ro
+      - ./entrypoint.sh:/home/${DOCKER_USER}/entrypoint.sh:ro
+      - ./config.json:/home/${DOCKER_USER}/config.json:ro
+      # Source code
+      - ./makefile:/home/${DOCKER_USER}/makefile:ro
+      - ./src/:/home/${DOCKER_USER}/src/:ro
+      - ./assets/:/home/${DOCKER_USER}/assets/:ro
+      - ./logs/:/home/${DOCKER_USER}/logs/
+      # SQLite file
+      - ./db/:/home/${DOCKER_USER}/db/
+    working_dir: /home/${DOCKER_USER}/
+    ports:
+      - 8080:8080
+    entrypoint: bash entrypoint.sh
