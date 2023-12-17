@@ -44,7 +44,6 @@ func serveCounter(c *gin.Context) {
 		return
 	} else {
 		url := murmur3Hasher(href)
-
 		handler, err := db.NewHandler()
 		if err != nil {
 			panic(err)

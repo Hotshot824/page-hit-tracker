@@ -1,4 +1,3 @@
-let count = 0;
 (() => {
     let url = new URL('{{ .PUBLISHING_URL }}');
     let params = {href: window.location.href};
@@ -11,7 +10,7 @@ let count = 0;
         referrerPolicy: 'no-referrer',
     }).then(response => response.json())
         .then(data => {
-            count = data.count;
+            let count = data.count;
             document.getElementById("page-hit-tracker").innerHTML = count;
         })
         .catch(error => console.log(error));
