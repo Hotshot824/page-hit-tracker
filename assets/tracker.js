@@ -1,6 +1,6 @@
 (() => {
     let url = new URL('{{ .PUBLISHING_URL }}');
-    let params = {href: window.location.href};
+    let params = { href: window.location.origin + window.location.pathname };
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
     fetch(url, {
         method: 'GET',
